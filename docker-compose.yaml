@@ -1,0 +1,22 @@
+services:
+
+  raulex-lib:
+    build: ./raulex-lib
+    volumes:
+      - ./raulex-lib/src:/usr/app/src
+    environment:
+      - REDIS_URL=redis://redis-storage
+    ports:
+      - 8000:8000
+    networks:
+      - backend
+
+  redis-storage:
+    build: ./redis-storage
+    volumes:
+      - ./redis-storage/data:/data
+    networks:
+      - backend
+
+networks:
+  backend:
