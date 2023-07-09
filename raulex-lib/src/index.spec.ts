@@ -83,15 +83,15 @@ describe(`redis-connection-pool`, () => {
             })
             await connectionPool?.registerConnection( gatewaysConnection )
 
+
         })
         it(`can create new gateway`, async () => {
-            //let newGateway = await gatewaysConnection.addGateway()
-            
-            expect( 1 ).toBeTruthy()
+            let newGateway = await connectionPool.get<GatewayRedisConnection>( RedisConnectionType.Gateways )?.addGateway()
+            expect( newGateway ).toBeTruthy()
         })
     })
 
     afterAll( async () => {
-        await connectionPool?.shutoff()
+        //await connectionPool?.shutoff()
     })
 })
